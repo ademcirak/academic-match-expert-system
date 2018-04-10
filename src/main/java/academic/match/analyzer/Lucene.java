@@ -7,6 +7,7 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.miscellaneous.PerFieldAnalyzerWrapper;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.DoublePoint;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
@@ -37,7 +38,7 @@ public class Lucene {
         Map<String, Analyzer> analyzerMap = new HashMap<String, Analyzer>();
         analyzerMap.put(FieldConstants.KEYWORDS, new KeywordAnalyzer());
         PerFieldAnalyzerWrapper wrapper = new PerFieldAnalyzerWrapper(new StandardAnalyzer(), analyzerMap);
-        IndexWriterConfig config = new IndexWriterConfig(wrapper).setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND)
+        IndexWriterConfig config = new IndexWriterConfig(wrapper).setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
 
         this.writer = new IndexWriter(dir, config);
         this.reader = DirectoryReader.open(writer);
@@ -47,7 +48,6 @@ public class Lucene {
     public static Lucene build() throws Exception {
         return new Lucene();
     }
-
 
     protected Document personToDocument(Person person) {
         Document doc = new Document();
@@ -90,6 +90,9 @@ public class Lucene {
         doc.add(new TextField(FieldConstants.KEYWORDS, keywords, Field.Store.YES));
         doc.add(new TextField(FieldConstants.TITLES, titles, Field.Store.YES));
         doc.add(new TextField(FieldConstants.ABSTRACTS, abstracts, Field.Store.YES));
+        doc.add(new DoublePoint(FieldConstants.ACCEPT_RATE, person.acceptRate));
+        doc.add(new DoublePoint(FieldConstants.AVAILABILITY, person.availability));
+        doc.add(new DoublePoint(FieldConstants.ACCURACY, person.accuracy));
         return doc;
     }
 
