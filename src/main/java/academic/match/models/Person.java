@@ -1,8 +1,9 @@
 package academic.match.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Person {
+public class Person implements Serializable {
     public Integer id;
     public String mendeleyId;
     public String name;
