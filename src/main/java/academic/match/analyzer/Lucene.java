@@ -14,6 +14,7 @@ import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.store.RAMDirectory;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 final public class Lucene {
@@ -33,10 +33,8 @@ final public class Lucene {
     Analyzer analyzer;
 
 
-    Lucene() throws Exception {
-        this.dir = FSDirectory.open(new File(LuceneConstants.FILE_PATH).toPath());
-
-
+    Lucene(Directory dir) throws Exception {
+        this.dir = dir;
         Map<String, Analyzer> analyzerMap = new HashMap<String, Analyzer>();
         analyzerMap.put(FieldConstants.KEYWORDS, new KeywordAnalyzer());
         analyzer = new PerFieldAnalyzerWrapper(new StandardAnalyzer(), analyzerMap);
@@ -47,14 +45,22 @@ final public class Lucene {
         this.searcher = new IndexSearcher(reader);
     }
 
+
+
     public static Lucene build() throws Exception {
-        return new Lucene();
+        return new Lucene(FSDirectory.open(new File(LuceneConstants.FILE_PATH).toPath()));
+    }
+
+    public static Lucene tempBuild() throws Exception {
+        return new Lucene(new RAMDirectory());
     }
 
     protected Document personToDocument(Person person) {
         Document doc = new Document();
 
-        String keywords = person.keywords.stream()
+        String keywords = "";
+        if(person.keywords!=null && !person.keywords.isEmpty())
+            keywords = person.keywords.stream()
                 .collect(Collectors.joining(","));
 
         String titles = person.papers.stream()
@@ -108,7 +114,9 @@ final public class Lucene {
 
     public List<Person> search(Paper paper) throws Exception {
 
-        String keywords = paper.keywords.stream()
+        String keywords = "";
+        if(paper.keywords!=null && !paper.keywords.isEmpty())
+            keywords = paper.keywords.stream()
                 .collect(Collectors.joining(" OR "));
 
         Query titleTq = new QueryParser(FieldConstants.TITLES, analyzer).parse(paper.title);
@@ -116,13 +124,13 @@ final public class Lucene {
         Query keywordsTq = new QueryParser(FieldConstants.KEYWORDS, analyzer).parse(keywords);
         // Query keywordsTq = new TermQuery(new Term(FieldConstants.KEYWORDS, keywords));
 
-        Query availability = DoublePoint.newRangeQuery(FieldConstants.AVAILABILITY, 1, Integer.MIN_VALUE);
-        Query acceptRate = DoublePoint.newRangeQuery(FieldConstants.ACCEPT_RATE, 1, Integer.MIN_VALUE);
-        Query accuracy = DoublePoint.newRangeQuery(FieldConstants.ACCURACY, 1, Integer.MIN_VALUE);
+        Query availability = DoublePoint.newRangeQuery(FieldConstants.AVAILABILITY, 1, Integer.MAX_VALUE);
+        Query acceptRate = DoublePoint.newRangeQuery(FieldConstants.ACCEPT_RATE, 1, Integer.MAX_VALUE);
+        Query accuracy = DoublePoint.newRangeQuery(FieldConstants.ACCURACY, 1, Integer.MAX_VALUE);
 
         BooleanQuery.Builder builder = new BooleanQuery.Builder();
         Query query = builder
-                .add(titleTq, BooleanClause.Occur.MUST)
+                .add(titleTq, BooleanClause.Occur.SHOULD)
                 .add(abstractTq, BooleanClause.Occur.SHOULD)
                 .add(keywordsTq, BooleanClause.Occur.SHOULD)
                 .add(availability, BooleanClause.Occur.FILTER)
