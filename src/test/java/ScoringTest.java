@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import academic.match.analyzer.FieldConstants;
 import academic.match.analyzer.Lucene;
 import academic.match.models.Paper;
 import academic.match.models.Person;
@@ -97,7 +98,7 @@ class ScoringTest {
         p4.papers.add(paper3);
 
         p4.schools = new ArrayList<String>(Arrays.asList(new String[] { "Mersin University", "Cukurova University" }));
-        persons.add(p3);
+        persons.add(p4);
 
 
         return persons;
@@ -114,10 +115,10 @@ class ScoringTest {
     }
 
     @Test
-    void myFirstTest() throws Exception {
+    void scoringTest() throws Exception {
 
 
-        Lucene instance = Lucene.tempBuild();
+        Lucene instance = Lucene.build();
 
 
         ArrayList<Person> persons = this.getTestList();
@@ -128,6 +129,10 @@ class ScoringTest {
         }
 
         List<Person> results = instance.search(testPaper);
+
+        for (Person p : results) {
+            System.out.println(p.toString());
+        }
 
         assertFalse(results.isEmpty());
     }

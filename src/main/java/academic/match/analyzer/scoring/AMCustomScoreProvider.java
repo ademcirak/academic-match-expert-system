@@ -32,7 +32,7 @@ public class AMCustomScoreProvider extends CustomScoreProvider {
         IndexableField acceptRateIf= document.getField(FieldConstants.AVAILABILITY);// the field I wanted to extract
         float acceptRate = acceptRateIf.numericValue().floatValue();
 
-        return (availabilityScore * AVAILABILITY_MULTIPLIER
+        return (1 + availabilityScore * AVAILABILITY_MULTIPLIER
                 + accuracyScore * ACCURACY_MULTIPLIER
                 + ACCEPT_RATE_MULTIPLIER * accuracyScore)
                 * subQueryScore;

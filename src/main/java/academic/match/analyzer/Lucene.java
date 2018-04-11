@@ -29,7 +29,7 @@ final public class Lucene {
     Directory dir;
     IndexWriter writer;
     IndexReader reader;
-    IndexSearcher searcher;
+    IndexSearcher searcher = null;
     Analyzer analyzer;
 
 
@@ -42,7 +42,6 @@ final public class Lucene {
 
         this.writer = new IndexWriter(dir, config);
         this.reader = DirectoryReader.open(writer);
-        this.searcher = new IndexSearcher(reader);
     }
 
 
@@ -93,27 +92,37 @@ final public class Lucene {
         keywords = keywords + (paperKeywords.length() > 0 ? ("," + paperKeywords) : "");
 
         TextField keywordField = new TextField(FieldConstants.KEYWORDS, keywords, Field.Store.YES);
+        TextField titleField = new TextField(FieldConstants.TITLES, titles, Field.Store.YES);
 
         doc.add(new TextField(FieldConstants.ID, person.id.toString(), Field.Store.YES));
         doc.add(new TextField(FieldConstants.NAME, person.name, Field.Store.YES));
         doc.add(new TextField(FieldConstants.SURNAME, person.surname, Field.Store.YES));
         doc.add(keywordField);
-        doc.add(new TextField(FieldConstants.TITLES, titles, Field.Store.YES));
+        doc.add(titleField);
         doc.add(new TextField(FieldConstants.ABSTRACTS, abstracts, Field.Store.YES));
-        doc.add(new DoublePoint(FieldConstants.ACCEPT_RATE, person.acceptRate));
-        doc.add(new DoublePoint(FieldConstants.AVAILABILITY, person.availability));
-        doc.add(new DoublePoint(FieldConstants.ACCURACY, person.accuracy));
+
+        doc.add(new StoredField(FieldConstants.ACCEPT_RATE, person.acceptRate));
+        doc.add(new StoredField(FieldConstants.AVAILABILITY, person.availability));
+        doc.add(new StoredField(FieldConstants.ACCURACY, person.accuracy));
+        // doc.add(new DoubleDocValuesField(FieldConstants.AVAILABILITY, person.availability));
+        // doc.add(new DoubleDocValuesField(FieldConstants.ACCURACY, person.accuracy));
         return doc;
     }
 
     public void indexPerson(Person person) throws Exception {
+        System.out.println("new person indexing: " + person);
         Document doc = this.personToDocument(person);
         this.writer.addDocument(doc);
         writer.commit();
+        System.out.println("new person indexed");
     }
 
     public List<Person> search(Paper paper) throws Exception {
 
+        // init reader if not exist
+        if(searcher==null) {
+            searcher = new IndexSearcher(reader);
+        }
         String keywords = "";
         if(paper.keywords!=null && !paper.keywords.isEmpty())
             keywords = paper.keywords.stream()
@@ -124,15 +133,18 @@ final public class Lucene {
         Query keywordsTq = new QueryParser(FieldConstants.KEYWORDS, analyzer).parse(keywords);
         // Query keywordsTq = new TermQuery(new Term(FieldConstants.KEYWORDS, keywords));
 
+        Query boostedtitleQuery = new BoostQuery(titleTq, 2);
+        Query boostedkeywordsQuery = new BoostQuery(keywordsTq, 2);
+
         Query availability = DoublePoint.newRangeQuery(FieldConstants.AVAILABILITY, 1, Integer.MAX_VALUE);
         Query acceptRate = DoublePoint.newRangeQuery(FieldConstants.ACCEPT_RATE, 1, Integer.MAX_VALUE);
         Query accuracy = DoublePoint.newRangeQuery(FieldConstants.ACCURACY, 1, Integer.MAX_VALUE);
 
         BooleanQuery.Builder builder = new BooleanQuery.Builder();
         Query query = builder
-                .add(titleTq, BooleanClause.Occur.SHOULD)
+                .add(boostedtitleQuery, BooleanClause.Occur.SHOULD)
                 .add(abstractTq, BooleanClause.Occur.SHOULD)
-                .add(keywordsTq, BooleanClause.Occur.SHOULD)
+                .add(boostedkeywordsQuery, BooleanClause.Occur.SHOULD)
                 .add(availability, BooleanClause.Occur.FILTER)
                 .add(acceptRate, BooleanClause.Occur.FILTER)
                 .add(accuracy, BooleanClause.Occur.FILTER)
@@ -151,6 +163,7 @@ final public class Lucene {
             p.id = Integer.parseInt(d.get(FieldConstants.ID));
             p.name = d.get(FieldConstants.NAME);
             p.surname = d.get(FieldConstants.SURNAME);
+            p.score = sd.score;
             results.add(p);
         }
         return results;

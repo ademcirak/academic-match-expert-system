@@ -11,6 +11,7 @@ public class Person implements Serializable {
     public String name;
     public String surname;
     public String title;
+    public float score;
     @Min(0)
     @Max(10)
     public Double availability;
@@ -24,4 +25,23 @@ public class Person implements Serializable {
     public List<String> relatedPersons;
     public List<String> keywords;
     public List<Paper> papers;
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + (id==null ? "" : id) +
+                ", mendeleyId='" + (mendeleyId==null ? "" : mendeleyId) + '\'' +
+                ", name='" + (name==null ? "" : name) + '\'' +
+                ", surname='" + (surname==null ? "" : surname) + '\'' +
+                ", title='" + (title==null ? "" : title) + '\'' +
+                ", score=" + score +
+                ", availability=" + (availability==null ? "" : availability) +
+                ", accuracy=" + (accuracy==null ? "" : accuracy) +
+                ", acceptRate=" + (acceptRate==null ? "" : acceptRate) +
+                ", schools=" + (schools==null ? "" : schools) +
+                ", relatedPersons=" + (relatedPersons==null ? "" : relatedPersons) +
+                ", keywords=" + (keywords==null ? "" : keywords) +
+                ", paperCount=" + (papers==null ? "0" : papers.size()) +
+                '}';
+    }
 }
