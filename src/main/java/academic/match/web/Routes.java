@@ -1,4 +1,6 @@
 package academic.match.web;
+import academic.match.web.controllers.IndexController;
+
 import static spark.Spark.*;
 
 public class Routes {
@@ -6,6 +8,12 @@ public class Routes {
     // see http://sparkjava.com/documentation#routes
 
     public static void registerRoutes() throws Exception {
+
+        port(8282);
+        staticFiles.location("/public"); // Static files
+        staticFiles.expireTime(600L);
+
+        get("/test", IndexController.serveIndexPage);
         get("/hello", (req, res) -> "Hello World");
 
 
@@ -15,7 +23,6 @@ public class Routes {
             return "Hello: " + request.params(":name");
         });
 
-        staticFiles.location("/public"); // Static files
 
         // Using Route
         notFound((req, res) -> {
