@@ -17,6 +17,7 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.RAMDirectory;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,7 @@ final public class Lucene {
     IndexReader reader;
     IndexSearcher searcher = null;
     Analyzer analyzer;
+    static Lucene instance;
 
 
     Lucene(Directory dir) throws Exception {
@@ -47,11 +49,20 @@ final public class Lucene {
 
 
     public static Lucene build() throws Exception {
-        return new Lucene(FSDirectory.open(new File(LuceneConstants.FILE_PATH).toPath()));
+        instance = new Lucene(FSDirectory.open(new File(LuceneConstants.FILE_PATH).toPath()));
+        return instance;
     }
 
     public static Lucene tempBuild() throws Exception {
-        return new Lucene(new RAMDirectory());
+        instance = new Lucene(new RAMDirectory());
+        return instance;
+    }
+
+    public void closeWriter() throws IOException {
+        if(instance!=null) {
+            writer.commit();
+            writer.close();
+        }
     }
 
     protected Document personToDocument(Person person) {
@@ -152,7 +163,7 @@ final public class Lucene {
 
         CustomScoreQuery scoredQuery = new AMCustomScoreQuery(query);
 
-        TopDocs hits = this.searcher.search(query, LuceneConstants.MAX_SEARCH);
+        TopDocs hits = this.searcher.search(scoredQuery, LuceneConstants.MAX_SEARCH);
         System.out.println(hits.totalHits + " docs found for the query \"" + query.toString() + "\"");
 
         ArrayList<Person> results = new ArrayList<>(LuceneConstants.MAX_SEARCH);

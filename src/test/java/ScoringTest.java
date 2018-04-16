@@ -120,13 +120,14 @@ class ScoringTest {
 
         Lucene instance = Lucene.build();
 
-
         ArrayList<Person> persons = this.getTestList();
         Paper testPaper = this.testPaper();
 
         for(Person p : persons) {
             instance.indexPerson(p);
         }
+
+        instance.closeWriter();
 
         List<Person> results = instance.search(testPaper);
 

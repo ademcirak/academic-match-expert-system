@@ -34,7 +34,7 @@ public class AMCustomScoreProvider extends CustomScoreProvider {
 
         return (1 + availabilityScore * AVAILABILITY_MULTIPLIER
                 + accuracyScore * ACCURACY_MULTIPLIER
-                + ACCEPT_RATE_MULTIPLIER * accuracyScore)
+                + ACCEPT_RATE_MULTIPLIER * acceptRate)
                 * subQueryScore;
 
     }
