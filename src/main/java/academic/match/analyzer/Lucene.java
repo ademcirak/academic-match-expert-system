@@ -156,9 +156,9 @@ final public class Lucene {
                 .add(boostedtitleQuery, BooleanClause.Occur.SHOULD)
                 .add(abstractTq, BooleanClause.Occur.SHOULD)
                 .add(boostedkeywordsQuery, BooleanClause.Occur.SHOULD)
-                .add(availability, BooleanClause.Occur.FILTER)
-                .add(acceptRate, BooleanClause.Occur.FILTER)
-                .add(accuracy, BooleanClause.Occur.FILTER)
+                // .add(availability, BooleanClause.Occur.FILTER)
+                // .add(acceptRate, BooleanClause.Occur.FILTER)
+                // .add(accuracy, BooleanClause.Occur.FILTER)
                 .build();
 
         CustomScoreQuery scoredQuery = new AMCustomScoreQuery(query);
