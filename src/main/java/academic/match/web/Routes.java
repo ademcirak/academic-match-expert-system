@@ -11,7 +11,7 @@ public class Routes {
 
         port(8282);
         staticFiles.location("/public"); // Static files
-        staticFiles.expireTime(600L);
+        staticFiles.expireTime(0);
 
         get("/test", IndexController.serveIndexPage);
         get("/hello", (req, res) -> "Hello World");

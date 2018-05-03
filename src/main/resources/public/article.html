@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Academic Match</title>
+    <title>Article | Academic Match</title>
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -23,13 +23,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/person.html">Person</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/article.html">Add Article</a>
                 </li>
 
@@ -40,17 +40,43 @@
 
 <main role="main">
 
-    <section class="jumbotron text-center">
+    <section class="jumbotron">
         <div class="container">
-            <h1 class="jumbotron-heading">Academic Match</h1>
-            <p class="lead text-muted">
-            <p>
-                <a href="/person.html" class="btn btn-primary my-2">Add Author</a>
-            </p>
+            <form target="_blank" onsubmit="try {return window.confirm(&quot;Dışarıdaki bir sayfaya bilgi gönderiyorsunuz.\nEmin misiniz?&quot;);} catch (e) {return false;}">
+                <fieldset>
 
-            <p>
-                <a href="/article.html" class="btn btn-primary my-2">Add Article</a>
-            </p>
+
+                    <center><legend>Article Information</legend></center>
+
+
+
+
+                    <div>
+                        <label>Title:</label>
+                        <div>
+                            <input name="Title" type="text">
+
+                        </div>
+                    </div><br>
+
+                    <div>
+                        <label>Abstract:</label>
+                        <div>
+                            <textarea name="abstract" rows="5"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <label>Keywords:</label>
+                        <div>
+                            <input name="keywords" type="text">
+
+                        </div>
+                    </div>
+                    <button type="button">Submit</button><br><br>
+                </fieldset>
+            </form>
 
         </div>
     </section>
