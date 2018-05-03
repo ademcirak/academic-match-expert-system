@@ -13,7 +13,7 @@ public class Run {
 
         // TODO: init scraper
 
-        // TODO: init lucene index
+         // TODO: init lucene index
         try {
             lucene = Lucene.build();
         }catch (Exception e) {
