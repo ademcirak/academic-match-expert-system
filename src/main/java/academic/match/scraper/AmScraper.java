@@ -7,6 +7,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/*import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper; //readValue () ve writeValue () yöntemlerini sağlar
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.journaldev.jackson.model.Address;
+import com.journaldev.jackson.model.Employee;*/
+
 public class AmScraper implements Scraper  {
 
     // https://www.journaldev.com/2324/jackson-json-java-parser-api-example-tutorial
@@ -22,7 +38,7 @@ public class AmScraper implements Scraper  {
         paper1.keywords =new ArrayList<String>(Arrays.asList(new String[] { "deep learning", "word2vec", "text classification", "Text categorization", "word vector", "Turkish text classification", "ttc-3600" }));
         paper1.abstractText = "This paper investigates deep learning and word embedding classification performance over Turkish texts using an existing dataset called TTC-3600. TTC-3600 is gathered from Turkish news and articles for researches on Turkish text classification [TTC]. Our work achieved a higher classification accuracy than original study. We used raw text data and steamed versions for calculation. Some pre-processing methods also applied to increase accuracy. ";
         paper1.title = "A Study of Text Classification with Embedding for Turkish Text Categorization";
-
+        paper1.owner = 528;//
 
         papers.add(paper1);
         return papers;
@@ -30,6 +46,10 @@ public class AmScraper implements Scraper  {
 
     @Override
     public Person getPerson(String name) {
+        return null;
+    }
+
+    public Person getPerson1(String surname) {
         return null;
     }
 

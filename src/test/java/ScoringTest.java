@@ -6,12 +6,17 @@ import academic.match.analyzer.FieldConstants;
 import academic.match.analyzer.Lucene;
 import academic.match.models.Paper;
 import academic.match.models.Person;
+import com.fasterxml.jackson.core.JsonParser;
 import org.junit.jupiter.api.Test;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
 
 class ScoringTest {
 
@@ -31,6 +36,7 @@ class ScoringTest {
         paper1.keywords =new ArrayList<String>(Arrays.asList(new String[] { "deep learning", "word2vec", "text classification", "Text categorization", "word vector", "Turkish text classification", "ttc-3600" }));
         paper1.abstractText = "This paper investigates deep learning and word embedding classification performance over Turkish texts using an existing dataset called TTC-3600. TTC-3600 is gathered from Turkish news and articles for researches on Turkish text classification [TTC]. Our work achieved a higher classification accuracy than original study. We used raw text data and steamed versions for calculation. Some pre-processing methods also applied to increase accuracy. ";
         paper1.title = "A Study of Text Classification with Embedding for Turkish Text Categorization";
+        paper1.owner = 528;
         p1.papers = new ArrayList<>();
         p1.papers.add(paper1);
         p1.schools = new ArrayList<String>(Arrays.asList(new String[] { "Mersin University" }));
@@ -38,7 +44,7 @@ class ScoringTest {
 
 
         Person p2 = new Person();
-        p2.name = "Çiğem AAA = 528";
+        p2.name = "Çiğdem Aci = 528";
         p2.surname = "Acı";
         p2.id = 2;
         p2.acceptRate = 5d;
@@ -63,7 +69,7 @@ class ScoringTest {
 
 
         Person p3 = new Person();
-        p3.name = "Çiğem AAA = 575";
+        p3.name = "Çiğdem AAA = 575";
         p3.surname = "Acı";
         p3.id = 3;
         p3.acceptRate = 5d;
@@ -136,6 +142,7 @@ class ScoringTest {
         }
 
         assertFalse(results.isEmpty());
+
     }
 
 }
