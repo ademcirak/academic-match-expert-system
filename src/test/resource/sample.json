@@ -1,0 +1,497 @@
+// 20180506122326
+// https://www.mendeley.com/research-papers/api/search/?query=%C3%A7i%C4%9Fdem%20inan%20ac%C4%B1&page=1
+
+{
+  "items": [
+    {
+      "title": "A hybrid classification method of k nearest neighbor, Bayesian methods and genetic algorithm",
+      "type": "journal",
+      "authors": [
+        {
+          "first_name": "Mehmet",
+          "last_name": "Aci",
+          "scopus_author_id": "35236480500"
+        },
+        {
+          "first_name": "Cigdem",
+          "last_name": "Inan",
+          "scopus_author_id": "57190222086"
+        },
+        {
+          "first_name": "Mutlu",
+          "last_name": "Avci",
+          "scopus_author_id": "14053675800"
+        }
+      ],
+      "year": 2010,
+      "source": "Expert Systems with Applications",
+      "identifiers": {
+        "issn": "09574174",
+        "scopus": "2-s2.0-77950189563",
+        "sgr": "77950189563",
+        "pui": "50750431",
+        "doi": "10.1016/j.eswa.2009.12.004",
+        "pii": "S0957417409010501"
+      },
+      "keywords": [
+        "Bayesian method",
+        "Classification",
+        "Clustering",
+        "Genetic algorithm",
+        "Hybrid method",
+        "k Nearest neighbor method"
+      ],
+      "pages": "5061-5067",
+      "volume": "37",
+      "issue": "7",
+      "month": 7,
+      "id": "68c40ca2-de3a-39ea-8ac6-4d11aa6c9988",
+      "file_attached": false,
+      "imported": true,
+      "abstract": "k Nearest neighbor, Bayesian methods and genetic algorithms are effective methods of machine learning. In this work a hybrid method is formed by using these methods and algorithm together. The aim is to achieve successful results on classifying by eliminating data that make difficult to learn. Forming new data set approach is proposed according to good data on the hand. Test process is done with five of UCI machine learning datasets. These are iris, breast cancer, glass, yeast and wine data sets. Test results are investigated in collaboration with the previous works, and the success of the study is considered. © 2009 Elsevier Ltd. All rights reserved.",
+      "link": "/research/hybrid-classification-method-k-nearest-neighbor-bayesian-methods-genetic-algorithm-2",
+      "reader_count": 44,
+      "reader_count_by_academic_status": {
+        "Unspecified": 1,
+        "Professor > Associate Professor": 3,
+        "Researcher": 2,
+        "Student  > Doctoral Student": 2,
+        "Student  > Ph. D. Student": 6,
+        "Student  > Postgraduate": 1,
+        "Other": 1,
+        "Student  > Master": 18,
+        "Student  > Bachelor": 6,
+        "Lecturer": 3,
+        "Lecturer > Senior Lecturer": 1
+      },
+      "reader_count_by_user_role": {
+        "Unspecified": 1,
+        "Professor > Associate Professor": 3,
+        "Researcher": 2,
+        "Student  > Doctoral Student": 2,
+        "Student  > Ph. D. Student": 6,
+        "Student  > Postgraduate": 1,
+        "Other": 1,
+        "Student  > Master": 18,
+        "Student  > Bachelor": 6,
+        "Lecturer": 3,
+        "Lecturer > Senior Lecturer": 1
+      },
+      "reader_count_by_subject_area": {
+        "Engineering": 9,
+        "Unspecified": 1,
+        "Environmental Science": 1,
+        "Biochemistry, Genetics and Molecular Biology": 1,
+        "Arts and Humanities": 1,
+        "Business, Management and Accounting": 1,
+        "Chemistry": 1,
+        "Social Sciences": 1,
+        "Computer Science": 27,
+        "Linguistics": 1
+      },
+      "reader_count_by_subdiscipline": {
+        "Engineering": {
+          "Engineering": 9
+        },
+        "Chemistry": {
+          "Chemistry": 1
+        },
+        "Social Sciences": {
+          "Social Sciences": 1
+        },
+        "Computer Science": {
+          "Computer Science": 27
+        },
+        "Business, Management and Accounting": {
+          "Business, Management and Accounting": 1
+        },
+        "Linguistics": {
+          "Linguistics": 1
+        },
+        "Biochemistry, Genetics and Molecular Biology": {
+          "Biochemistry, Genetics and Molecular Biology": 1
+        },
+        "Unspecified": {
+          "Unspecified": 1
+        },
+        "Environmental Science": {
+          "Environmental Science": 1
+        },
+        "Arts and Humanities": {
+          "Arts and Humanities": 1
+        }
+      },
+      "reader_count_by_country": {
+        "Brazil": 1,
+        "Indonesia": 1
+      },
+      "has_pdf": false
+    },
+    {
+      "title": "A hybrid classification method of k nearest neighbor, Bayesian methods and genetic algorithm",
+      "type": "generic",
+      "authors": [
+        {
+          "first_name": "Mehmet",
+          "last_name": "Aci"
+        },
+        {
+          "first_name": "Cigdem",
+          "last_name": "İnan"
+        },
+        {
+          "first_name": "Mutlu",
+          "last_name": "Avci"
+        }
+      ],
+      "year": 2010,
+      "source": "Expert Systems with Applications",
+      "identifiers": {
+        "issn": "09574174",
+        "doi": "10.1016/j.eswa.2009.12.004"
+      },
+      "pages": "5061-5067",
+      "volume": "37",
+      "issue": "7",
+      "id": "ebbf479f-439e-3476-ad7e-9f54724ba78d",
+      "file_attached": false,
+      "imported": false,
+      "abstract": "k Nearest neighbor, Bayesian methods and genetic algorithms are effective methods of machine learning. In this work a hybrid method is formed by using these methods and algorithm together. The aim is to achieve successful results on classifying by eliminating data that make difficult to learn. Forming new data set approach is proposed according to good data on the hand. Test process is done with five of UCI machine learning datasets. These are iris, breast cancer, glass, yeast and wine data sets. Test results are investigated in collaboration with the previous works, and the success of the study is considered.",
+      "link": "/research/hybrid-classification-method-k-nearest-neighbor-bayesian-methods-genetic-algorithm-4",
+      "reader_count": 12,
+      "reader_count_by_academic_status": {
+        "Professor > Associate Professor": 2,
+        "Student  > Doctoral Student": 1,
+        "Student  > Ph. D. Student": 2,
+        "Student  > Master": 4,
+        "Student  > Bachelor": 1,
+        "Lecturer": 2
+      },
+      "reader_count_by_user_role": {
+        "Professor > Associate Professor": 2,
+        "Student  > Doctoral Student": 1,
+        "Student  > Ph. D. Student": 2,
+        "Student  > Master": 4,
+        "Student  > Bachelor": 1,
+        "Lecturer": 2
+      },
+      "reader_count_by_subject_area": {
+        "Engineering": 3,
+        "Environmental Science": 1,
+        "Computer Science": 8
+      },
+      "reader_count_by_subdiscipline": {
+        "Engineering": {
+          "Engineering": 3
+        },
+        "Computer Science": {
+          "Computer Science": 8
+        },
+        "Environmental Science": {
+          "Environmental Science": 1
+        }
+      },
+      "group_count": 1,
+      "has_pdf": false
+    },
+    {
+      "title": "A new congestion control algorithm for improving the performance of a broadcast-based multiprocessor architecture",
+      "type": "journal",
+      "authors": [
+        {
+          "first_name": "Cigdem Inan",
+          "last_name": "Aci",
+          "scopus_author_id": "36154688500"
+        },
+        {
+          "first_name": "Mehmet Fatih",
+          "last_name": "Akay",
+          "scopus_author_id": "7102443026"
+        }
+      ],
+      "year": 2010,
+      "source": "Journal of Parallel and Distributed Computing",
+      "identifiers": {
+        "issn": "07437315",
+        "scopus": "2-s2.0-77955512183",
+        "sgr": "77955512183",
+        "pui": "50982698",
+        "isbn": "0743-7315",
+        "doi": "10.1016/j.jpdc.2010.06.003",
+        "pii": "S0743731510001140"
+      },
+      "keywords": [
+        "Congestion control",
+        "Multiprocessor architectures",
+        "Optical interconnects",
+        "Simulation"
+      ],
+      "pages": "930-940",
+      "volume": "70",
+      "issue": "9",
+      "month": 9,
+      "id": "9dcb52ea-74f4-3611-bdc0-d634603d4f1e",
+      "file_attached": false,
+      "imported": true,
+      "abstract": "Congestion occurring in the input queues of broadcast-based multiprocessor architectures can severely limit their overall performance. The existing congestion control algorithms estimate congestion based on a node's output channel parameters such as the number of free virtual channels or the number of packets waiting at the channel queue. In this paper, we have proposed a new congestion control algorithm to prevent congestion on broadcast-based multiprocessor architectures with multiple input queues. Our algorithm performs congestion control at the packet level and takes into account the next input queue number which will be accessed by the processor, which form the fundamental differences between our algorithm and the algorithms based on the idea of virtual channel congestion control. The performance of the algorithm is evaluated by OPNET Modeler with various synthetic traffic patterns on a 64-node Simultaneous Optical Multiprocessor Exchange Bus (SOME-Bus) architecture employing the message passing protocol. Performance measures such as average input waiting time, average network response time and average processor utilization have been collected before and after applying the algorithm. The results show that the proposed algorithm is able to decrease the average input waiting time by 13.99% to 20.39%, average network response time by 8.76% to 20.36% and increase average processor utilization by 1.92% to 6.63%. The performance of the algorithm is compared with that of the other congestion control algorithms and it is observed that our algorithm performs better under all traffic patterns. Also, theoretical analysis of the proposed method is carried out by using queuing networks. © 2010 Elsevier Inc. All rights reserved.",
+      "link": "/research/new-congestion-control-algorithm-improving-performance-broadcastbased-multiprocessor-architecture",
+      "reader_count": 11,
+      "reader_count_by_academic_status": {
+        "Unspecified": 1,
+        "Professor > Associate Professor": 2,
+        "Researcher": 2,
+        "Student  > Ph. D. Student": 2,
+        "Student  > Master": 3,
+        "Professor": 1
+      },
+      "reader_count_by_user_role": {
+        "Unspecified": 1,
+        "Professor > Associate Professor": 2,
+        "Researcher": 2,
+        "Student  > Ph. D. Student": 2,
+        "Student  > Master": 3,
+        "Professor": 1
+      },
+      "reader_count_by_subject_area": {
+        "Engineering": 1,
+        "Unspecified": 1,
+        "Computer Science": 9
+      },
+      "reader_count_by_subdiscipline": {
+        "Engineering": {
+          "Engineering": 1
+        },
+        "Computer Science": {
+          "Computer Science": 9
+        },
+        "Unspecified": {
+          "Unspecified": 1
+        }
+      },
+      "reader_count_by_country": {
+        "Norway": 1
+      },
+      "group_count": 1,
+      "has_pdf": false
+    },
+    {
+      "title": "A hybrid congestion control algorithm for broadcast-based architectures with multiple input queues",
+      "type": "journal",
+      "authors": [
+        {
+          "first_name": "Çiğdem İnan",
+          "last_name": "Acı",
+          "scopus_author_id": "36154688500"
+        },
+        {
+          "first_name": "Mehmet Fatih",
+          "last_name": "Akay",
+          "scopus_author_id": "7102443026"
+        }
+      ],
+      "year": 2015,
+      "source": "Journal of Supercomputing",
+      "identifiers": {
+        "issn": "15730484",
+        "scopus": "2-s2.0-84939941399",
+        "sgr": "84939941399",
+        "pui": "602170688",
+        "doi": "10.1007/s11227-015-1384-1"
+      },
+      "keywords": [
+        "Broadcast-based interconnection networks",
+        "Congestion control",
+        "Multiple input queue",
+        "Simulation"
+      ],
+      "pages": "1907-1931",
+      "volume": "71",
+      "issue": "5",
+      "month": 5,
+      "publisher": "Kluwer Academic Publishers",
+      "day": 1,
+      "id": "86c408fd-5af3-3b4f-b992-fd624b6933a7",
+      "file_attached": false,
+      "imported": true,
+      "abstract": "The main purpose of this paper is to propose a hybrid congestion control algorithm to prevent congestion in 2-D broadcast-based multiprocessor architectures with multiple input queues. Our algorithm utilizes a node's both input queue and output channel parameters to detect and prevent congestion. The intermediate node selection procedure and the bypass operation have also been developed as part of the proposed algorithm. The performance of the algorithm is tested with several synthetic traffic patterns on the 2-D simultaneous optical multiprocessor exchange bus. The performance of the algorithm is compared with that of the algorithms which use only input and only output parameters and it is shown that the proposed congestion control algorithm using hybrid parameters performs better than the other algorithms. The proposed algorithm is able to decrease the average network response time by 33.63 %, average input waiting time by 29.13 % and increase average processor utilization by 7.57 % on the average.",
+      "link": "/research/hybrid-congestion-control-algorithm-broadcastbased-architectures-multiple-input-queues",
+      "reader_count": 4,
+      "reader_count_by_academic_status": {
+        "Unspecified": 1,
+        "Student  > Postgraduate": 1,
+        "Student  > Master": 1,
+        "Student  > Bachelor": 1
+      },
+      "reader_count_by_user_role": {
+        "Unspecified": 1,
+        "Student  > Postgraduate": 1,
+        "Student  > Master": 1,
+        "Student  > Bachelor": 1
+      },
+      "reader_count_by_subject_area": {
+        "Unspecified": 1,
+        "Computer Science": 3
+      },
+      "reader_count_by_subdiscipline": {
+        "Computer Science": {
+          "Computer Science": 3
+        },
+        "Unspecified": {
+          "Unspecified": 1
+        }
+      },
+      "reader_count_by_country": {
+        "Brazil": 1
+      },
+      "has_pdf": false
+    },
+    {
+      "title": "A hybrid classification method of k nearest neighbor, Bayesian methods and genetic algorithm",
+      "type": "journal",
+      "authors": [
+        {
+          "first_name": "Mehmet",
+          "last_name": "Aci"
+        },
+        {
+          "first_name": "Cigdem",
+          "last_name": "İnan"
+        },
+        {
+          "first_name": "Mutlu",
+          "last_name": "Avci"
+        },
+        {
+          "first_name": "Cigdem",
+          "last_name": "Inan"
+        },
+        {
+          "first_name": "Mutlu",
+          "last_name": "Avci"
+        }
+      ],
+      "year": 2010,
+      "source": "Expert Systems with Applications",
+      "identifiers": {
+        "issn": "09574174",
+        "doi": "10.1016/j.eswa.2009.12.004"
+      },
+      "keywords": [
+        "Bayesian method",
+        "Classification",
+        "Clustering",
+        "Genetic algorithm",
+        "Hybrid method",
+        "k Nearest neighbor method"
+      ],
+      "pages": "5061-5067",
+      "volume": "37",
+      "issue": "7",
+      "id": "a62ade6e-6b73-3571-a018-7675c8dc3d61",
+      "file_attached": false,
+      "imported": false,
+      "abstract": "k Nearest neighbor, Bayesian methods and genetic algorithms are effective methods of machine learning. In this work a hybrid method is formed by using these methods and algorithm together. The aim is to achieve successful results on classifying by eliminating data that make difficult to learn. Forming new data set approach is proposed according to good data on the hand. Test process is done with five of UCI machine learning datasets. These are iris, breast cancer, glass, yeast and wine data sets. Test results are investigated in collaboration with the previous works, and the success of the study is considered. ?? 2009 Elsevier Ltd. All rights reserved.",
+      "link": "/research/hybrid-classification-method-k-nearest-neighbor-bayesian-methods-genetic-algorithm-3",
+      "reader_count": 1,
+      "reader_count_by_academic_status": {
+        "Lecturer": 1
+      },
+      "reader_count_by_user_role": {
+        "Lecturer": 1
+      },
+      "reader_count_by_subject_area": {
+        "Computer Science": 1
+      },
+      "reader_count_by_subdiscipline": {
+        "Computer Science": {
+          "Computer Science": 1
+        }
+      },
+      "has_pdf": false
+    },
+    {
+      "title": "A hybrid classification method of k nearest neighbor, Bayesian methods and genetic algorithm",
+      "type": "journal",
+      "authors": [
+        {
+          "first_name": "Mehmet",
+          "last_name": "Aci"
+        },
+        {
+          "first_name": "Cigdem",
+          "last_name": "Inan"
+        },
+        {
+          "first_name": "Mutlu",
+          "last_name": "Avci"
+        },
+        {
+          "first_name": "Cigdem",
+          "last_name": "İnan"
+        },
+        {
+          "first_name": "Mutlu",
+          "last_name": "Avci"
+        },
+        {
+          "first_name": "Cigdem",
+          "last_name": "Inan"
+        },
+        {
+          "first_name": "Mutlu",
+          "last_name": "Avci"
+        }
+      ],
+      "year": 2010,
+      "source": "Expert Systems with Applications",
+      "identifiers": {
+        "issn": "09574174",
+        "doi": "10.1016/j.eswa.2009.12.004"
+      },
+      "keywords": [
+        "Bayesian method",
+        "Classification",
+        "Clustering",
+        "Genetic algorithm",
+        "Hybrid method",
+        "k Nearest neighbor method"
+      ],
+      "pages": "5061-5067",
+      "volume": "37",
+      "issue": "7",
+      "id": "abb0f020-4618-37ec-b36d-47979b177bad",
+      "file_attached": false,
+      "imported": false,
+      "abstract": "k Nearest neighbor, Bayesian methods and genetic algorithms are effective methods of machine learning. In this work a hybrid method is formed by using these methods and algorithm together. The aim is to achieve successful results on classifying by eliminating data that make difficult to learn. Forming new data set approach is proposed according to good data on the hand. Test process is done with five of UCI machine learning datasets. These are iris, breast cancer, glass, yeast and wine data sets. Test results are investigated in collaboration with the previous works, and the success of the study is considered. ?? 2009 Elsevier Ltd. All rights reserved.",
+      "link": "/research/hybrid-classification-method-k-nearest-neighbor-bayesian-methods-genetic-algorithm-5",
+      "reader_count": 1,
+      "reader_count_by_academic_status": {
+        "Lecturer": 1
+      },
+      "reader_count_by_user_role": {
+        "Lecturer": 1
+      },
+      "reader_count_by_subject_area": {
+        "Computer Science": 1
+      },
+      "reader_count_by_subdiscipline": {
+        "Computer Science": {
+          "Computer Science": 1
+        }
+      },
+      "has_pdf": false
+    }
+  ],
+  "total": 6,
+  "date": "Fri, 04 May 2018 00:22:50 GMT",
+  "pageData": {
+    "link": {
+
+    },
+    "headers": {
+      "Accept": "application/vnd.mendeley-document.1+json"
+    }
+  },
+  "page": "1",
+  "limit": 20
+}

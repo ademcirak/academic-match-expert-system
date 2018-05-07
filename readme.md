@@ -13,4 +13,7 @@ There is list of people contributed:
 
 - Çiğdem Acı
 - Adem Çırak
+-Sinem Seyrek
+- Fuat Yelken
 - add ur name here...
+-
