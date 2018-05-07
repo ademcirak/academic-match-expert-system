@@ -1,16 +1,16 @@
-import static org.junit.jupiter.api.Assertions.assertAll;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import academic.match.analyzer.FieldConstants;
 import academic.match.analyzer.Lucene;
 import academic.match.models.Paper;
 import academic.match.models.Person;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 class ScoringTest {
@@ -113,6 +113,19 @@ class ScoringTest {
         paper.owner = 4;
         return paper;
     }
+
+    @BeforeAll
+    static void initAll() {
+    }
+
+    @BeforeEach
+    void init() {
+    }
+
+    @Test
+    void succeedingTest() {
+    }
+
 
     @Test
     void scoringTest() throws Exception {

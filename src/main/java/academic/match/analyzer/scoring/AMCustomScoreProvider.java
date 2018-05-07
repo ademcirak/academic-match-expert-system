@@ -9,9 +9,9 @@ import java.io.IOException;
 
 public class AMCustomScoreProvider extends CustomScoreProvider {
 
-    private static float AVAILABILITY_MULTIPLIER = 1.2f;
-    private static float ACCURACY_MULTIPLIER = 2f;
-    private static float ACCEPT_RATE_MULTIPLIER = 0.5f;
+    private static float AVAILABILITY_MULTIPLIER = 0.1f;
+    private static float ACCURACY_MULTIPLIER = 0.1f;
+    private static float ACCEPT_RATE_MULTIPLIER = 0.1f;
 
     public AMCustomScoreProvider(LeafReaderContext context) {
         super(context);
