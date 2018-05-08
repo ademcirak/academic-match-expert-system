@@ -7,16 +7,30 @@ import java.util.List;
 
 public class REngine implements RuleEngine {
 
-    public List<Person> filter(List<Person> personList)
-    {
-        List<Person> persons = new ArrayList<>();
-        for(int i=0;i<personList.size();i++)
-        {
-            Person person1 = new Person();
-            // person1= personList(i);
-        if(person1.availability<=0 && person1.accuracy<=0 && person1.acceptRate<=0 ) //Belirlenecek değerlere göre filtreleme
-            persons.add(person1);
+    private static float SCORE_THRESHOLD = 0.2f;
+
+    public ArrayList<Person> filter(ArrayList<Person> personList) {
+        ArrayList<Person> filteredList = new ArrayList<>();
+
+        for (Person person : personList) {
+
+            // remove from list if any of listed is 0
+            if (person.availability <= 0
+                || person.accuracy <= 0
+                || person.acceptRate <= 0
+                )
+                continue;
+
+            // similarity threshold
+            if(person.score <= SCORE_THRESHOLD)
+                continue;
+
+            // TODO BİRKAN add other rules to here
+
+
+            // if all rules passed add to filtered list
+            filteredList.add(person);
         }
-        return persons;
+        return filteredList;
     }
 }
