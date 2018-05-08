@@ -4,11 +4,12 @@ import academic.match.models.Paper;
 import academic.match.models.Person;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 public interface Scraper {
 
-    public List<Paper> getPapers(Person person) throws IOException;
+    public ArrayList<Paper> getPapers(Person person) throws IOException;
+    public ArrayList<Person> getPerson(String name) throws IOException;
    /* public Person getPerson(Integer id);
     public Person getPerson(String mendeleyId);
     public Person getPerson(String title);

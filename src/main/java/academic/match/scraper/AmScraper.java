@@ -52,11 +52,12 @@ public class AmScraper implements Scraper  {
                 }
             }
             // try to find next pages
-            // TODO fetch next page too
+            // TODO FUAT fetch next page too
             try {
                 String nextPage = responseJson.getJSONObject("pageData").getJSONObject("link").getString("next");
             } catch (Exception e) {
-                e.printStackTrace();
+                // means we dont have next page
+                // e.printStackTrace();
             }
 
         } catch (Exception e) {
@@ -69,27 +70,40 @@ public class AmScraper implements Scraper  {
     private Paper convertFromJson(JSONObject obj) {
         Paper p = new Paper();
         p.keywords = new ArrayList<>();
-        JSONArray keywordArray = obj.getJSONArray("keywords");
-
-        for(int i = 0; i < keywordArray.length(); i++) {
-            p.keywords.add(keywordArray.getString(i));
-        }
         p.abstractText = obj.getString("abstract");
         p.title = obj.getString("title");
+        try {
+            JSONArray keywordArray = obj.getJSONArray("keywords");
+            for(int i = 0; i < keywordArray.length(); i++) {
+                p.keywords.add(keywordArray.getString(i));
+            }
+        } catch (Exception e) {
+            System.out.println("No keywords found for paper with title: " + p.title);
+        }
         return p;
     }
 
     @Override
-    public List<Paper> getPapers(Person person) throws IOException {
+    public ArrayList<Paper> getPapers(Person person) throws IOException {
 
         ArrayList<Paper> papers = new ArrayList<>();
 
         ArrayList<JSONObject> notParsedArray = this.getAll(person);
 
+        // TODO FUAT filter by scopus_author_id
+
         for (JSONObject obj : notParsedArray) {
             papers.add(this.convertFromJson(obj));
         }
+
+        System.out.println("Found count: " + papers.size());
+        System.out.println(papers);
         return papers;
+    }
+
+    @Override
+    public ArrayList<Person> getPerson(String name) throws IOException {
+        return null;
     }
 
     public static void main(String[] args) {
