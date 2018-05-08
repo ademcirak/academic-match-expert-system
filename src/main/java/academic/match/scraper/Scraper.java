@@ -3,14 +3,12 @@ package academic.match.scraper;
 import academic.match.models.Paper;
 import academic.match.models.Person;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface Scraper {
 
-    public List<Paper> getPapers(Person person);
-    public Person getPerson(String name);
-
-    public Person getPerson1(String surname);
+    public List<Paper> getPapers(Person person) throws IOException;
    /* public Person getPerson(Integer id);
     public Person getPerson(String mendeleyId);
     public Person getPerson(String title);

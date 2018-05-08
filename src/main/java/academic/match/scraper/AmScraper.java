@@ -2,26 +2,19 @@ package academic.match.scraper;
 
 import academic.match.models.Paper;
 import academic.match.models.Person;
+import okhttp3.*;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/*import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper; //readValue () ve writeValue () yöntemlerini sağlar
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.journaldev.jackson.model.Address;
-import com.journaldev.jackson.model.Employee;*/
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 public class AmScraper implements Scraper  {
 
@@ -29,35 +22,94 @@ public class AmScraper implements Scraper  {
     // https://dzone.com/articles/how-to-parse-json-data-from-a-rest-api-using-simpl
 
     // https://www.mendeley.com/research-papers/api/search/?query=%C3%A7i%C4%9Fdem%20inan%20ac%C4%B1&page=1
+
+    OkHttpClient client = new OkHttpClient();
+
+    String get(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Response response = client.newCall(request).execute();
+        return response.body().string();
+    }
+
+
+    ArrayList<JSONObject> getAll(Person person) throws IOException {
+        ArrayList<JSONObject> objects = new ArrayList<>();
+
+        Integer page = 1;
+
+        String url= "https://www.mendeley.com/research-papers/api/search/?query=" + URLEncoder.encode(person.getFullName(), "UTF-8") + "&page=1";
+
+
+        JSONObject responseJson = new JSONObject(this.get(url));
+
+        try {
+            JSONArray results = responseJson.getJSONArray("items");
+            if(results.length() > 0) {
+                for(int i = 0; i < results.length(); i++) {
+                    objects.add(results.getJSONObject(i));
+                }
+            }
+            // try to find next pages
+            // TODO fetch next page too
+            try {
+                String nextPage = responseJson.getJSONObject("pageData").getJSONObject("link").getString("next");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return objects;
+    }
+
+    private Paper convertFromJson(JSONObject obj) {
+        Paper p = new Paper();
+        p.keywords = new ArrayList<>();
+        JSONArray keywordArray = obj.getJSONArray("keywords");
+
+        for(int i = 0; i < keywordArray.length(); i++) {
+            p.keywords.add(keywordArray.getString(i));
+        }
+        p.abstractText = obj.getString("abstract");
+        p.title = obj.getString("title");
+        return p;
+    }
+
     @Override
-    public List<Paper> getPapers(Person person) {
+    public List<Paper> getPapers(Person person) throws IOException {
 
         ArrayList<Paper> papers = new ArrayList<>();
 
-        Paper paper1 = new Paper();
-        paper1.keywords =new ArrayList<String>(Arrays.asList(new String[] { "deep learning", "word2vec", "text classification", "Text categorization", "word vector", "Turkish text classification", "ttc-3600" }));
-        paper1.abstractText = "This paper investigates deep learning and word embedding classification performance over Turkish texts using an existing dataset called TTC-3600. TTC-3600 is gathered from Turkish news and articles for researches on Turkish text classification [TTC]. Our work achieved a higher classification accuracy than original study. We used raw text data and steamed versions for calculation. Some pre-processing methods also applied to increase accuracy. ";
-        paper1.title = "A Study of Text Classification with Embedding for Turkish Text Categorization";
-        paper1.owner = 528;//
+        ArrayList<JSONObject> notParsedArray = this.getAll(person);
 
-        papers.add(paper1);
+        for (JSONObject obj : notParsedArray) {
+            papers.add(this.convertFromJson(obj));
+        }
         return papers;
-    }
-
-    @Override
-    public Person getPerson(String name) {
-        return null;
-    }
-
-    public Person getPerson1(String surname) {
-        return null;
     }
 
     public static void main(String[] args) {
 
         Scraper myScrapper = new AmScraper();
 
-        myScrapper.getPerson("Çiğdem İnan Acı");
+        Person p2 = new Person();
+        p2.name = "Çiğdem İnan";
+        p2.surname = "Acı";
+        p2.id = 2;
+        p2.acceptRate = 5d;
+        p2.availability = 2d;
+        p2.accuracy = 8d;
+
+        try {
+            ArrayList<Paper> list = myScrapper.getPapers(p2);
+            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

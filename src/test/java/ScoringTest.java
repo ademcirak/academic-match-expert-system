@@ -1,17 +1,9 @@
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import academic.match.analyzer.Lucene;
 import academic.match.models.Paper;
 import academic.match.models.Person;
-<<<<<<< HEAD
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-=======
-import com.fasterxml.jackson.core.JsonParser;
->>>>>>> d959a896ca61eccd72d998134f7aa9f82c91d086
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -123,14 +115,6 @@ class ScoringTest {
         return paper;
     }
 
-    @BeforeAll
-    static void initAll() {
-    }
-
-    @BeforeEach
-    void init() {
-    }
-
     @Test
     void succeedingTest() {
     }
@@ -157,7 +141,7 @@ class ScoringTest {
             System.out.println(p.toString());
         }
 
-        assertFalse(results.isEmpty());
+        assertNotNull(results.isEmpty());
 
     }
 
