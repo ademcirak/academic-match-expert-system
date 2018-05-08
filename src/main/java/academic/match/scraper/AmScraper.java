@@ -93,14 +93,17 @@ public class AmScraper implements Scraper  {
         // TODO FUAT filter by scopus_author_id
 
         for (JSONObject obj : notParsedArray) {
-            papers.add(this.convertFromJson(obj));
+            Paper paper = this.convertFromJson(obj);
+            paper.owner = person.id;
+            papers.add(paper);
         }
-
+        // TODO FUAT uncomment
         System.out.println("Found count: " + papers.size());
         System.out.println(papers);
         return papers;
     }
 
+    // TODO FUAT just do it
     @Override
     public ArrayList<Person> getPerson(String name) throws IOException {
         return null;
