@@ -42,9 +42,11 @@
 
     <section class="jumbotron">
         <div class="container">
-            <form target="_blank" onsubmit="try {return window.confirm(&quot;Dışarıdaki bir sayfaya bilgi gönderiyorsunuz.\nEmin misiniz?&quot;);} catch (e) {return false;}">
-                <fieldset>
+            <div class="row">
+                <div class="col">
 
+            <form method="post" action="" id="person-form">
+                <fieldset>
 
                     <legend>Author Information</legend>
 
@@ -133,12 +135,19 @@
                     </div>
 
 
-                    <button type="button">Submit</button><br><br>
+                    <button type="submit">Submit</button>
+
                 </fieldset>
 
             </form>
+                </div>
 
+                <div class="col">
+                    <p id="result"></p>
 
+                </div>
+
+            </div>
         </div>
     </section>
 </main>
@@ -155,7 +164,36 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script>
+
+    $(function() {
+
+        console.log("jquery is ok");
+
+        // this is the id of the form
+        $("#person-form").submit(function(e) {
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            console.log("form submited");
+
+            var url = "/person/create"; // the script where you handle the form input.
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: $("#person-form").serialize(),
+                success: function(data) {
+                    $('#result').html(data);
+                }
+            });
+
+        });
+
+
+    });
+</script>
 </body>
 </html>
