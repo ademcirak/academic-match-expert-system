@@ -111,10 +111,12 @@ final public class Lucene {
         doc.add(keywordField);
         doc.add(titleField);
         doc.add(new TextField(FieldConstants.ABSTRACTS, abstracts, Field.Store.YES));
+        doc.add(new TextField(FieldConstants.SCOPUS_ID, person.scopusAuthorId, Field.Store.YES));
 
         doc.add(new StoredField(FieldConstants.ACCEPT_RATE, person.acceptRate));
         doc.add(new StoredField(FieldConstants.AVAILABILITY, person.availability));
         doc.add(new StoredField(FieldConstants.ACCURACY, person.accuracy));
+
         // doc.add(new DoubleDocValuesField(FieldConstants.AVAILABILITY, person.availability));
         // doc.add(new DoubleDocValuesField(FieldConstants.ACCURACY, person.accuracy));
         return doc;
@@ -126,6 +128,19 @@ final public class Lucene {
         this.writer.addDocument(doc);
         writer.commit();
         System.out.println("new person indexed");
+    }
+
+    public boolean isPersonIndexed(Person person) throws IOException {
+        // init reader if not exist
+        if(searcher==null)
+            searcher = new IndexSearcher(reader);
+
+        TopDocs docs = searcher.search(new TermQuery(new Term(FieldConstants.SCOPUS_ID, person.scopusAuthorId)), 1);
+
+        if(docs == null)
+            return false;
+
+        return  docs.totalHits > 0;
     }
 
     public List<Person> search(Paper paper) throws Exception {
@@ -174,6 +189,10 @@ final public class Lucene {
             p.id = Integer.parseInt(d.get(FieldConstants.ID));
             p.name = d.get(FieldConstants.NAME);
             p.surname = d.get(FieldConstants.SURNAME);
+            p.scopusAuthorId = d.get(FieldConstants.SCOPUS_ID);
+            p.acceptRate = d.getField(FieldConstants.ACCEPT_RATE).numericValue().doubleValue();
+            p.availability = d.getField(FieldConstants.AVAILABILITY).numericValue().doubleValue();
+            p.accuracy = d.getField(FieldConstants.ACCURACY).numericValue().doubleValue();
             p.score = sd.score;
             results.add(p);
         }

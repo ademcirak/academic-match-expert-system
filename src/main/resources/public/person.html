@@ -52,6 +52,13 @@
 
 
 
+                    <div>
+                        <label>Scopus ID:</label>
+                        <div>
+                            <input name="scopus_id" type="text" required>
+
+                        </div>
+                    </div>
 
                     <div>
                         <label>Title:</label>
@@ -84,7 +91,7 @@
                     <div>
                         <label>Availability:</label>
                         <div>
-                            <input name="availability" type="text">
+                            <input name="availability" type="text" value="5">
 
                         </div>
                     </div>
@@ -93,7 +100,7 @@
                     <div>
                         <label>Accuracy:</label>
                         <div>
-                            <input name="accuracy" type="text">
+                            <input name="accuracy" type="text" value="5">
 
                         </div>
                     </div>
@@ -102,7 +109,7 @@
                     <div>
                         <label>Accept Rate:</label>
                         <div>
-                            <input name="accept_rate" type="text">
+                            <input name="accept_rate" type="text" value="5">
 
                         </div>
                     </div>
@@ -143,10 +150,8 @@
                 </div>
 
                 <div class="col">
-                    <p id="result"></p>
-
+                    <div id="result"></div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -161,13 +166,49 @@
     </div>
 </footer>
 
+
+
+
+
+<script id="resultTemplate" type="x-tmpl-mustache">
+
+
+    <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                Person Card
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{title}} {{name}} {{surname}}</h5>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        {{#papers}}
+            <div class="col-md-12">
+                <div class="card mb-12 box-shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{ title }}
+                        </h5>
+                        <p class="card-text"><b>Keywords:</b> {{ keywords }}</p>
+                        <p class="card-text">{{ abstractText }}</p>
+                    </div>
+                </div>
+            </div>
+        {{/papers}}
+    </div>
+
+</script>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/js/mustache.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script>
-
     $(function() {
 
         console.log("jquery is ok");
@@ -184,9 +225,22 @@
             $.ajax({
                 type: 'POST',
                 url: url,
+                dataType: 'json',
                 data: $("#person-form").serialize(),
                 success: function(data) {
-                    $('#result').html(data);
+                    console.log('data', data);
+
+                    if(data && data.papers && data.papers.length > 0) {
+                        for(var i = 0; i < data.papers.length; i++) {
+                            data.papers[i].abstractText = data.papers[i].abstractText.substr(0, 100) + '...';
+                            data.keywords = data.papers[i].keywords.join(', ');
+                        }
+                    }
+                    var template = $('#resultTemplate').html();
+                    Mustache.parse(template);   // optional, speeds up future uses
+                    var rendered = Mustache.render(template, data);
+                    $('#result').html(rendered);
+
                 }
             });
 

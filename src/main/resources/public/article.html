@@ -41,8 +41,11 @@
 <main role="main">
 
     <section class="jumbotron">
-        <div class="container">
-            <form target="_blank" onsubmit="try {return window.confirm(&quot;Dışarıdaki bir sayfaya bilgi gönderiyorsunuz.\nEmin misiniz?&quot;);} catch (e) {return false;}">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+            <form method="post" action="" id="paper-form">
                 <fieldset>
 
 
@@ -54,14 +57,14 @@
                     <div>
                         <label>Title:</label>
                         <div>
-                            <input name="Title" type="text">
+                            <input name="title" type="text">
 
                         </div>
                     </div><br>
                     <div>
                         <label>Author:</label>
                         <div>
-                            <input name="Author" type="text">
+                            <input name="author" type="text">
 
                         </div>
                     </div><br>
@@ -81,11 +84,17 @@
 
                         </div>
                     </div>
-                    <button type="button">Submit</button><br><br>
+                    <button type="submit">Submit</button><br><br>
                 </fieldset>
             </form>
 
+            </div>
+
+            <div class="col">
+                <div id="result"></div>
+            </div>
         </div>
+    </div>
     </section>
 </main>
 
@@ -98,10 +107,82 @@
     </div>
 </footer>
 
+
+
+<script id="resultTemplate" type="x-tmpl-mustache">
+
+
+    <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{count}} result found.</h5>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        {{#persons}}
+            <div class="col-md-12">
+                <div class="card mb-12 box-shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{ title }} {{ name }} {{ surname }}
+                        </h5>
+                        <p class="card-text"><b>Accept Rate:</b> {{ acceptRate }}</p>
+                        <p class="card-text"><b>Accuracy:</b> {{ accuracy }}</p>
+                        <p class="card-text"><b>Availability:</b> {{ availability }}</p>
+                        <p class="card-text">Score: {{ score }}</p>
+                        <p class="card-text"><a href="https://www.scopus.com/authid/detail.uri?authorId={{ scopusAuthorId }}" target="_blank">Scopus</a></p>
+
+                    </div>
+                </div>
+            </div>
+        {{/persons}}
+    </div>
+
+</script>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/js/mustache.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script>
+    $(function() {
+        // this is the id of the form
+        $("#paper-form").submit(function(e) {
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            console.log("form submited");
+
+            var url = "/match"; // the script where you handle the form input.
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                data: $("#paper-form").serialize(),
+                success: function(data) {
+                    console.log('data', data);
+
+                    var viewData = {};
+                    viewData.persons = data;
+                    viewData.count = data.length;
+
+                    var template = $('#resultTemplate').html();
+                    Mustache.parse(template);   // optional, speeds up future uses
+                    var rendered = Mustache.render(template, viewData);
+                    $('#result').html(rendered);
+
+                }
+            });
+
+        });
+
+
+    });
+</script>
 </body>
 </html>

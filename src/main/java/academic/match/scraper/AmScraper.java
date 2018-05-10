@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -22,8 +23,15 @@ public class AmScraper implements Scraper  {
     // https://dzone.com/articles/how-to-parse-json-data-from-a-rest-api-using-simpl
 
     // https://www.mendeley.com/research-papers/api/search/?query=%C3%A7i%C4%9Fdem%20inan%20ac%C4%B1&page=1
+    OkHttpClient client = null;
+    public AmScraper() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        client = new OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .build();
+    }
 
-    OkHttpClient client = new OkHttpClient();
 
     String get(String url) throws IOException {
         Request request = new Request.Builder()
@@ -80,6 +88,7 @@ public class AmScraper implements Scraper  {
         } catch (Exception e) {
             System.out.println("No keywords found for paper with title: " + p.title);
         }
+
         return p;
     }
 
@@ -93,9 +102,13 @@ public class AmScraper implements Scraper  {
         // TODO FUAT filter by scopus_author_id
 
         for (JSONObject obj : notParsedArray) {
-            Paper paper = this.convertFromJson(obj);
-            paper.owner = person.id;
-            papers.add(paper);
+            try {
+                Paper paper = this.convertFromJson(obj);
+                paper.owner = person.id;
+                papers.add(paper);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         // TODO FUAT uncomment
         System.out.println("Found count: " + papers.size());

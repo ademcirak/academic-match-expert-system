@@ -27,7 +27,7 @@ public class Run {
 
         // register routes
         try {
-            Routes.registerRoutes();
+            Routes.registerRoutes(lucene);
         } catch (Exception e) {
             System.out.println("Route registration failed:" + e.getMessage());
             e.printStackTrace();
