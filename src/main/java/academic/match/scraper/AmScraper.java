@@ -47,7 +47,7 @@ public class AmScraper implements Scraper  {
 
         Integer page = 1;
 
-        String url= "https://www.mendeley.com/research-papers/api/search/?query=" + URLEncoder.encode(person.getFullName(), "UTF-8") + "&page=1";
+        String url= "https://www.mendeley.com/research-papers/api/search/?query=" + URLEncoder.encode(person.getFullName(), "UTF-8") + "&page=1&limit=100";
 
 
         JSONObject responseJson = new JSONObject(this.get(url));
@@ -75,7 +75,7 @@ public class AmScraper implements Scraper  {
         return objects;
     }
 
-    private Paper convertFromJson(JSONObject obj) {
+    private Paper convertFromJson(JSONObject obj, Person person) {
         Paper p = new Paper();
         p.keywords = new ArrayList<>();
         p.abstractText = obj.getString("abstract");
@@ -88,6 +88,35 @@ public class AmScraper implements Scraper  {
         } catch (Exception e) {
             System.out.println("No keywords found for paper with title: " + p.title);
         }
+
+        try {
+            boolean isInArray = false;
+            JSONArray authors = obj.getJSONArray("authors");
+            for(int i = 0; i < authors.length(); i++) {
+                JSONObject author = authors.getJSONObject(i);
+
+                String firstName = author.getString("first_name");
+                String lastName = author.getString("last_name");
+
+                if(firstName.equals(person.name) && lastName.equals(person.surname)) {
+                    isInArray = true;
+                    try {
+                        person.scopusAuthorId = author.getString("scopus_author_id");
+                    } catch (Exception e) {
+                        System.out.println("Empty scopus_author_id: " + p.title);
+                    }
+                    // if found stop loop
+                    break;
+                }
+            }
+
+            if(!isInArray)
+                return null;
+
+        } catch (Exception e) {
+            return null;
+        }
+
 
         return p;
     }
@@ -103,7 +132,12 @@ public class AmScraper implements Scraper  {
 
         for (JSONObject obj : notParsedArray) {
             try {
-                Paper paper = this.convertFromJson(obj);
+                Paper paper = this.convertFromJson(obj, person);
+
+                // skip null
+                if(paper == null)
+                    continue;
+
                 paper.owner = person.id;
                 papers.add(paper);
             }catch (Exception e) {

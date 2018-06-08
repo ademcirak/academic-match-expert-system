@@ -12,6 +12,7 @@ import org.apache.lucene.index.*;
 import org.apache.lucene.queries.CustomScoreQuery;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.*;
+import org.apache.lucene.search.similarities.ClassicSimilarity;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.RAMDirectory;
@@ -47,9 +48,28 @@ final public class Lucene {
     }
 
 
+    public void reopenReader() throws IOException {
+        if(this.searcher != null) {
+            reader.close();
+        }
+        IndexWriterConfig config = new IndexWriterConfig(analyzer).setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
+        this.writer = new IndexWriter(dir, config);
+        this.reader = DirectoryReader.open(writer);
+    }
+
+    public int getDocumentCount() {
+        return this.reader.numDocs();
+    }
+
+
 
     public static Lucene build() throws Exception {
         instance = new Lucene(FSDirectory.open(new File(LuceneConstants.FILE_PATH).toPath()));
+        return instance;
+    }
+
+    public static Lucene build(String path) throws Exception {
+        instance = new Lucene(FSDirectory.open(new File(path).toPath()));
         return instance;
     }
 
@@ -108,6 +128,7 @@ final public class Lucene {
         doc.add(new TextField(FieldConstants.ID, person.id.toString(), Field.Store.YES));
         doc.add(new TextField(FieldConstants.NAME, person.name, Field.Store.YES));
         doc.add(new TextField(FieldConstants.SURNAME, person.surname, Field.Store.YES));
+        doc.add(new TextField(FieldConstants.AREA, person.area, Field.Store.YES));
         doc.add(keywordField);
         doc.add(titleField);
         doc.add(new TextField(FieldConstants.ABSTRACTS, abstracts, Field.Store.YES));
@@ -149,6 +170,7 @@ final public class Lucene {
         if(searcher==null) {
             searcher = new IndexSearcher(reader);
         }
+
         String keywords = "";
         if(paper.keywords!=null && !paper.keywords.isEmpty())
             keywords = paper.keywords.stream()
@@ -178,6 +200,8 @@ final public class Lucene {
 
         CustomScoreQuery scoredQuery = new AMCustomScoreQuery(query);
 
+        // searcher.setSimilarity(new ClassicSimilarity());
+
         TopDocs hits = this.searcher.search(scoredQuery, LuceneConstants.MAX_SEARCH);
         System.out.println(hits.totalHits + " docs found for the query \"" + query.toString() + "\"");
 
@@ -189,6 +213,7 @@ final public class Lucene {
             p.id = Integer.parseInt(d.get(FieldConstants.ID));
             p.name = d.get(FieldConstants.NAME);
             p.surname = d.get(FieldConstants.SURNAME);
+            p.area = d.get(FieldConstants.AREA);
             p.scopusAuthorId = d.get(FieldConstants.SCOPUS_ID);
             p.acceptRate = d.getField(FieldConstants.ACCEPT_RATE).numericValue().doubleValue();
             p.availability = d.getField(FieldConstants.AVAILABILITY).numericValue().doubleValue();

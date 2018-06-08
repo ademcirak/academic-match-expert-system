@@ -11,4 +11,5 @@ public class FieldConstants {
     public static final String ACCURACY = "ACCURACY";
     public static final String AVAILABILITY = "AVAILABILITY";
     public static final String SCOPUS_ID = "SCOPUS_ID";
+    public static final String AREA = "AREA";
 }

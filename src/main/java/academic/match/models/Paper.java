@@ -6,6 +6,7 @@ import java.util.List;
 public class Paper implements Serializable {
 
     public String title;
+    public int year;
     public String abstractText;
     public List<String> keywords;
     public Integer owner;

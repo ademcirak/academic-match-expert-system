@@ -8,7 +8,7 @@ import java.util.List;
 public class Person implements Serializable {
     public Integer id;
     public String mendeleyId;
-    public String scopusAuthorId;
+    public String scopusAuthorId = "";
     public String name;
     public String surname;
     public String title;
@@ -26,6 +26,7 @@ public class Person implements Serializable {
     public List<String> relatedPersons;
     public List<String> keywords;
     public List<Paper> papers;
+    public String area;
 
 
     public String getFullName() {
