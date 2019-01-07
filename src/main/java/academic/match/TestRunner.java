@@ -50,7 +50,7 @@ public class TestRunner {
                     continue;
 
                 for (String l : line) {
-                    System.out.print(l + '|');
+                    System.out.print(reader.getLinesRead() + " - " + l + '|');
                 }
                 System.out.print('\n');
 
@@ -102,9 +102,13 @@ public class TestRunner {
 
             Person removed1 = findAndRemoveRandomPerson(personList, "Elektrik Elektronik Mühendisliği");
             Person removed2 = findAndRemoveRandomPerson(personList, "Bilgisayar Mühendisliği");
+            Person removed3 = findAndRemoveRandomPerson(personList, "Biyoloji");
+            Person removed4 = findAndRemoveRandomPerson(personList, "Gıda Mühendisliği");
 
             testList.add(removed1);
             testList.add(removed2);
+            testList.add(removed3);
+            testList.add(removed4);
 
             for(Person p : personList) {
                 lucene.indexPerson(p);
@@ -130,7 +134,7 @@ public class TestRunner {
                     else
                         map.put(p.area, ++count);
                 }
-                System.out.println("results for: " + testPerson.getFullName());
+                System.out.println("results for: " + testPerson.getFullName() + " Major: " + testPerson.area);
                 System.out.println(map);
             }
 

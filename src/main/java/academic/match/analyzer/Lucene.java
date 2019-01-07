@@ -176,8 +176,8 @@ final public class Lucene {
             keywords = paper.keywords.stream()
                 .collect(Collectors.joining(" OR "));
 
-        Query titleTq = new QueryParser(FieldConstants.TITLES, analyzer).parse(paper.title);
-        Query abstractTq = new QueryParser(FieldConstants.ABSTRACTS, analyzer).parse(paper.abstractText);
+        Query titleTq = new QueryParser(FieldConstants.TITLES, analyzer).parse(QueryParser.escape(paper.title));
+        Query abstractTq = new QueryParser(FieldConstants.ABSTRACTS, analyzer).parse(QueryParser.escape(paper.abstractText));
         Query keywordsTq = new QueryParser(FieldConstants.KEYWORDS, analyzer).parse(keywords);
         // Query keywordsTq = new TermQuery(new Term(FieldConstants.KEYWORDS, keywords));
 
